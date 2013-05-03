@@ -23,7 +23,7 @@ Update the assets:
 	php app/console assets:install           # Windows
 	php app/console assets:install --symlink # Others
 
-As a security, you have to specify some roles that can access the less features:
+As a security, you have to specify some roles that can access the less features in your config.yml file:
 
 	da_less:
 		roles: [ROLE_ADMIN]
