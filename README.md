@@ -52,8 +52,7 @@ Compilation through a form
 
 It is possible to use a form to configure and execute a compilation.
 
-Definition of the parameters
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+### Definition of the parameters
 
 The 4 configurable parameters are:
 
@@ -71,8 +70,7 @@ The 4 configurable parameters are:
 * | **The destination file:**
   | This is the name and the path of the css destination file.
 
-Format of the parameters
-~~~~~~~~~~~~~~~~~~~~~~~~
+### Format of the parameters
 
 For obvious security reasons, it is not possible to access any file of the disk.
 The source files must be in a directory of that format:
@@ -107,8 +105,7 @@ Compilation through a configuration file
 
 It is possible to use a configuration file to configure compilations that you want to execute frequently.
 
-Format of the configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+### Format of the configuration
 
 Configuration file:
 
@@ -159,8 +156,7 @@ is equivalent to:
                 source: "MySuperBundle:custom"
                 destination: "MySuperBundle:custom"
 
-Execution of a configurated compilation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+### Execution of a configurated compilation
 
 To execute a configurated compilation, you just have to use the interface or the following url:
 
