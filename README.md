@@ -56,19 +56,19 @@ It is possible to use a form to configure and execute a compilation.
 
 The 4 configurable parameters are:
 
-* | **The default directory:**
-  | This is the path of the directory where you can find the less files that will be used during the compilation.
+* **The default directory:**
+  This is the path of the directory where you can find the less files that will be used during the compilation.
 
-* | **The override directory:**
-  | In the case where there are many less files in the default directory, you can define a path to an override directory 
-    whom its files will override the files of the default directory. This is especially helpful when you have one configuration less file that you want in several versions, for instance.
+* **The override directory:**
+  In the case where there are many less files in the default directory, you can define a path to an override directory 
+  whom its files will override the files of the default directory. This is especially helpful when you have one configuration less file that you want in several versions, for instance.
 
-* | **The source file:**
-  | This is the name of the less source file of the compilation. If the default directory is not defined, you have to specify 
-    the path of the file.
+* **The source file:**
+  This is the name of the less source file of the compilation. If the default directory is not defined, you have to specify 
+  the path of the file.
 
-* | **The destination file:**
-  | This is the name and the path of the css destination file.
+* **The destination file:**
+  This is the name and the path of the css destination file.
 
 ### Format of the parameters
 
