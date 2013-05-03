@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>LESS</title>
+
+		<script src="{{ asset('bundles/daless/js/jquery.js') }}" type="text/javascript"></script>
+
+		{% for compilationId, compilationInfo in compilation %}
+			{% if compilationInfo.error is not defined %}
+				<link id="less:{{ compilationId }}_" title="{{ compilationId }}" rel="stylesheet/less" type="text/css" href="{{ asset(compilationInfo.source) }}" data-compilation="{{ compilationId }}" data-destination="{{ compilationInfo.destination }}"/>
+			{% endif %}
+		{% endfor %}
+
+		<script type="text/javascript">
+			function EmptyString() {}
+			EmptyString.prototype.toString = function () { return ''; }
+			emptyString = new EmptyString();
+		    less = 
+			    {
+			        env: 'development',			 // 'development' or 'production'
+			        async: false,                // load imports async
+			        fileAsync: false,            // load imports async when in a page under a file protocol
+			        poll: 0, 	                 // when in watch mode, time in ms between polls
+			        functions: {},               // user functions, keyed by name
+			        dumpLineNumbers: 'comments', // 'comments' or 'mediaQuery' or 'all'
+			        relativeUrls: false,         // whether to adjust url's to be relative, if false, url's are already relative to the entry less file
+			        rootpath: emptyString	     // a path to add on to the start of every url resource
+			    };
+		</script>
+		<script src="{{ asset('bundles/daless/js/less.js') }}" type="text/javascript"></script>	
+
+		<script type="text/javascript">
+			$.each
+			(
+				document.styleSheets,
+				function(key, styleSheet)
+				{
+					var lessSheet = $(document.getElementById(styleSheet.ownerNode.id + '_'));
+					$.ajax
+					(
+						{
+							type: 'POST',
+							url: "{{ path('da_less_main_save') }}",
+							data: 'style=' + styleSheet.ownerNode.innerText + '&destination=' + lessSheet.data('destination') + '&compilationId=' + lessSheet.data('compilation'),
+							success: function() {},
+							dataType: 'text',
+							success:
+								function(data)
+								{
+									$("#info-" + lessSheet.data('compilation')).text(data);
+								},
+							error:
+								function()
+								{
+									var compilationId = lessSheet.data('compilation');
+									$("#info-" + compilationId).text('The compilation "' + compilationId + '" failed.');
+								}
+						}
+					);
+				}
+			);
+		</script>
+	</head>
+
+	<body>
+		{% for compilationId, compilationInfo in compilation %}
+			<p id="info-{{ compilationId }}">
+				{% if compilationInfo.error is defined %}
+					The compilation "{{ compilationId }}" failed: {{ compilationInfo.error }}
+				{% else %}
+					The compilation "{{ compilationId }}" is processing...
+				{% endif %}
+			</p>
+		{% endfor %}
+		<a href="{{ path('da_less_main_index') }}">Back to the index</a>
+	</body>
+</html>

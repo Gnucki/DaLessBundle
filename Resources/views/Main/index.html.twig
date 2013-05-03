@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>LESS</title>
+	</head>
+	<body>
+		<h1>Form compilation</h1>
+		<form action="{{ path('da_less_main_index') }}" method="post" {{ form_enctype(form) }}>
+		    {{ form_widget(form) }}
+		    <input type="submit" value="Compile"/>
+		</form>
+
+		<h1>Set compilation</h1>
+		{% for compilationId, compilationInfo in compilation %}
+			<a href="{{ path('da_less_main_compile', {'compilationId': compilationId}) }}">Compile "{{ compilationId }}"</a><br />
+		{% endfor %}
+
+		<h1>Global compilation</h1>
+		<a href="{{ path('da_less_main_compile', {'compilationId': '_all'}) }}">Compile all</a>
+	</body>
+</html>

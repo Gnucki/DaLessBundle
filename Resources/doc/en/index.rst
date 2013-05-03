@@ -1,43 +1,7 @@
-DaLessBundle
-============
+Documentation of the DaLessBundle
+=================================
 
-The DaLessBundle is a Symfony2's bundle that allows to compile less files to css without having to install anything else but this bundle.
-
-Installation
-------------
-
-Add the following line to the require section of you composer.json file:
-
-	"da/less-bundle": "dev-master"
-
-Run the composer update command:
-
-	php composer.phar update
-
-Add the following line to your AppKernel.php file (it is highly recommended to add it in the dev section):
-
-	$bundles[] = new Da\LessBundle\DaLessBundle();
-
-Update the assets.
-In windows:
-
-	php app/console assets:install
-
-On others:
-
-	php app/console assets:install --symlink
-
-As a security, you have to specify some roles that can access the less features:
-
-da_less:
-    roles: [ROLE_ADMIN]
-
-You can bypass this security like that (you should not do it in production environment):
-
-da_less:
-    roles: [anonymous]
-
-You should now be able to use the DaLessBundle.
+The DaLessBundle allows to compile less files to css without to install anything else but this bundle.
 
 Access the interface of compilation
 -----------------------------------
@@ -48,6 +12,8 @@ An interface allows to process the different available kinds of compilation:
 * The compilation through a configuration file 
 
 It is available to the following url:
+
+.. code-block:: bash
 
     /__da/less
 
@@ -81,12 +47,16 @@ Format of the parameters
 For obvious security reasons, it is not possible to access any file of the disk.
 The source files must be in a directory of that format:
 
+.. code-block:: bash
+
     {bundle_root_dir}/Resources/private/less # for directories and less files.
     {bundle_root_dir}/Resources/public/css # for css files.
 
 Of course, the files can be in any of the subdirectories of this directory.
 
 A syntactic sugar has been implemented to avoid the tedious repetition of this path:
+
+.. code-block:: bash
 
     BundleName:path/to/directory/or/file
 
@@ -95,12 +65,16 @@ A syntactic sugar has been implemented to avoid the tedious repetition of this p
 
 Which gives, for the default and override directories:
 
+.. code-block:: bash
+
     MySuperBundle:themes/aqua
     # equivalent to the directory /src/My/SuperBundle/Resources/private/less/themes/aqua
     MySuperBundle:
     # equivalent to the directory /src/My/SuperBundle/Resources/private/less
 
 And for the source and destination files:
+
+.. code-block:: bash
 
     MySuperBundle:themes/aqua/mystyle
     # equivalent to the file /src/My/SuperBundle/Resources/private/less/themes/aqua/mystyle.less for a source.
@@ -114,21 +88,23 @@ It is possible to use a configuration file to configure compilations that you wa
 Format of the configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Configuration file:
+.. configuration-block::
 
-    # /app/config/config.yml
-    da_less:
-        compilation:
-            bootstrap:
-                default: "BootstrapBundle:"
-                override: "MySuperBundle:bootstrap"
-                source: bootstrap
-                destination: "MySuperBundle:bootstrap"
-            custom:
-                default: "MySuperBundle:"
-                override:
-                source: custom
-                destination: "MySuperBundle:custom"
+    .. code-block:: yaml
+
+        # /app/config/config.yml
+        da_less:
+            compilation:
+                bootstrap:
+                    default: "BootstrapBundle:"
+                    override: "MySuperBundle:bootstrap"
+                    source: bootstrap
+                    destination: "MySuperBundle:bootstrap"
+                custom:
+                    default: "MySuperBundle:"
+                    override:
+                    source: custom
+                    destination: "MySuperBundle:custom"
 
 In this exemple, bootstrap and custom are identifiers of a compilation. Like for a compilation through a form, it is possible 
 to use the simplified notation.
@@ -141,40 +117,43 @@ You can imagine that a variables.less file in the directory /src/Resources/priva
 The source file of the compilation is bootstrap.less (resulting of the merge of the default and override directories) 
 and the destination file is /src/Resources/public/css/bootstrap.css.
 
-It is possible to simplify the code when there is no override directory. Thus:
+.. tip::
 
-.. code-block:: yaml
+    It is possible to simplify the code when there is no override directory. Thus,
 
-    # /app/config/config.yml
-    da_less:
-        compilation:
-            custom:
-                default: "MySuperBundle:"
-                override:
-                source: custom
-                destination: "MySuperBundle:custom"
+    .. code-block:: yaml
 
-is equivalent to:
+        # /app/config/config.yml
+        da_less:
+            compilation:
+                custom:
+                    default: "MySuperBundle:"
+                    override:
+                    source: custom
+                    destination: "MySuperBundle:custom"
 
-    # /app/config/config.yml
-    da_less:
-        compilation:
-            custom:
-                source: "MySuperBundle:custom"
-                destination: "MySuperBundle:custom"
+    is equivalent to
+
+    .. code-block:: yaml
+
+        # /app/config/config.yml
+        da_less:
+            compilation:
+                custom:
+                    source: "MySuperBundle:custom"
+                    destination: "MySuperBundle:custom"
 
 Execution of a configurated compilation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To execute a configurated compilation, you just have to use the interface or the following url:
 
+.. code-block:: bash
+
     /__da/less/compile/{compilation_id}
 
 To execute all the configurated compilations, you just have to use the interface or the following url:
 
+.. code-block:: bash
+
     /__da/less/compile/_all
-
-Documentation
--------------
-
-An english and a french documentation are present in the Resources/doc directory of the bundle.

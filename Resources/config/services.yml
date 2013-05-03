@@ -1,0 +1,8 @@
+parameters:
+    da.less.compiler.class: Da\LessBundle\Core\Compilation\Compiler
+
+services:
+    da.less.compiler:
+        class: %da.less.compiler.class%
+        scope: request
+        arguments: [%kernel.bundles%, %kernel.root_dir%, %da.less.config.compilation%]

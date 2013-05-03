@@ -1,0 +1,25 @@
+{
+    "name": "da/less-bundle",
+    "type": "symfony-bundle",
+    "description": "Bundle allowing to compile less files",
+    "keywords": ["less", "bundle", "da", "compile", "compilation"],
+    "homepage": "http://github.com/Gnucki/DaLessBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thomas Prelot",
+            "email": "tprelot@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2"
+    },
+    "require-dev": {
+        "symfony/framework-bundle": ">=2.1"
+    },
+    "autoload": {
+        "psr-0": { "Da\\LessBundle": "" }
+    },
+    "minimum-stability": "dev",
+    "target-dir": "Da/LessBundle"
+}
