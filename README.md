@@ -18,24 +18,20 @@ Add the following line to your AppKernel.php file (it is highly recommended to a
 
 	$bundles[] = new Da\LessBundle\DaLessBundle();
 
-Update the assets.
-In windows:
+Update the assets:
 
-	php app/console assets:install
-
-On others:
-
-	php app/console assets:install --symlink
+	php app/console assets:install           # Windows
+	php app/console assets:install --symlink # Others
 
 As a security, you have to specify some roles that can access the less features:
 
-da_less:
-    roles: [ROLE_ADMIN]
+	da_less:
+		roles: [ROLE_ADMIN]
 
 You can bypass this security like that (you should not do it in production environment):
 
-da_less:
-    roles: [anonymous]
+	da_less:
+		roles: [anonymous]
 
 You should now be able to use the DaLessBundle.
 
