@@ -136,8 +136,6 @@ and the destination file is /src/Resources/public/css/bootstrap.css.
 
 It is possible to simplify the code when there is no override directory. Thus:
 
-.. code-block:: yaml
-
     # /app/config/config.yml
     da_less:
         compilation:
