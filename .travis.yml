@@ -4,6 +4,13 @@ php:
   - 5.3
   - 5.4
 
-before_script: composer install
+env:
+  - SYMFONY_VERSION="2.1.*"
+  - SYMFONY_VERSION="2.2.*"
+  - SYMFONY_VERSION="dev-master"
+
+before_script: 
+  - composer require symfony/framework-bundle:${SYMFONY_VERSION}
+  - composer install
 
 phpunit: phpunit --coverage-text
