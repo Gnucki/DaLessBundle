@@ -9,40 +9,40 @@ Installation
 Add the following line to the require section of you composer.json file:
 
 ``` json
-	"da/less-bundle": "dev-master"
+"da/less-bundle": "dev-master"
 ```
 	
 Run the composer update command:
 
 ``` bash
-	php composer.phar update
+php composer.phar update
 ```
 	
 Add the following line to your AppKernel.php file (it is highly recommended to add it in the dev section):
 
 ``` php
-	$bundles[] = new Da\LessBundle\DaLessBundle();
+$bundles[] = new Da\LessBundle\DaLessBundle();
 ```
 	
 Update the assets:
 
 ``` bash
-	php app/console assets:install           # Windows
-	php app/console assets:install --symlink # Others
+php app/console assets:install           # Windows
+php app/console assets:install --symlink # Others
 ```
 	
 As a security, you have to specify some roles that can access the less features in your config.yml file:
 
 ``` bash
-	da_less:
-		roles: [ROLE_ADMIN]
+da_less:
+	roles: [ROLE_ADMIN]
 ```
 		
 You can bypass this security like that (you should not do it in production environment):
 
 ``` bash
-	da_less:
-		roles: [anonymous]
+da_less:
+	roles: [anonymous]
 ```
 		
 You should now be able to use the DaLessBundle.
@@ -88,8 +88,8 @@ For obvious security reasons, it is not possible to access any file of the disk.
 The source files must be in a directory of that format:
 
 ``` bash
-    {bundle_root_dir}/Resources/private/less # for directories and less files.
-    {bundle_root_dir}/Resources/public/css # for css files.
+{bundle_root_dir}/Resources/private/less # for directories and less files.
+{bundle_root_dir}/Resources/public/css # for css files.
 ```
 	
 Of course, the files can be in any of the subdirectories of this directory.
@@ -97,7 +97,7 @@ Of course, the files can be in any of the subdirectories of this directory.
 A syntactic sugar has been implemented to avoid the tedious repetition of this path:
 
 ``` bash
-    BundleName:path/to/directory/or/file
+BundleName:path/to/directory/or/file
 ```
 	
 * **BundleName** represents the name of the bundle in Symfony (DaLessBundle for this bundle for instance).
@@ -106,18 +106,18 @@ A syntactic sugar has been implemented to avoid the tedious repetition of this p
 Which gives, for the default and override directories:
 
 ``` bash
-    MySuperBundle:themes/aqua
-    # equivalent to the directory /src/My/SuperBundle/Resources/private/less/themes/aqua
-    MySuperBundle:
-    # equivalent to the directory /src/My/SuperBundle/Resources/private/less
+MySuperBundle:themes/aqua
+# equivalent to the directory /src/My/SuperBundle/Resources/private/less/themes/aqua
+MySuperBundle:
+# equivalent to the directory /src/My/SuperBundle/Resources/private/less
 ```
 	
 And for the source and destination files:
 
 ``` bash
-    MySuperBundle:themes/aqua/mystyle
-    # equivalent to the file /src/My/SuperBundle/Resources/private/less/themes/aqua/mystyle.less for a source.
-    # equivalent to the file /src/My/SuperBundle/Resources/public/css/themes/aqua/mystyle.css for a destination.
+MySuperBundle:themes/aqua/mystyle
+# equivalent to the file /src/My/SuperBundle/Resources/private/less/themes/aqua/mystyle.less for a source.
+# equivalent to the file /src/My/SuperBundle/Resources/public/css/themes/aqua/mystyle.css for a destination.
 ```
 	
 Compilation through a configuration file
@@ -130,19 +130,19 @@ It is possible to use a configuration file to configure compilations that you wa
 Configuration file:
 
 ``` bash
-    # /app/config/config.yml
-    da_less:
-        compilation:
-            bootstrap:
-                default: "BootstrapBundle:"
-                override: "MySuperBundle:bootstrap"
-                source: bootstrap
-                destination: "MySuperBundle:bootstrap"
-            custom:
-                default: "MySuperBundle:"
-                override:
-                source: custom
-                destination: "MySuperBundle:custom"
+# /app/config/config.yml
+da_less:
+    compilation:
+        bootstrap:
+            default: "BootstrapBundle:"
+            override: "MySuperBundle:bootstrap"
+            source: bootstrap
+            destination: "MySuperBundle:bootstrap"
+        custom:
+            default: "MySuperBundle:"
+            override:
+            source: custom
+            destination: "MySuperBundle:custom"
 ```
 				
 In this exemple, bootstrap and custom are identifiers of a compilation. Like for a compilation through a form, it is possible 
@@ -159,25 +159,25 @@ and the destination file is /src/Resources/public/css/bootstrap.css.
 It is possible to simplify the code when there is no override directory. Thus:
 
 ``` bash
-    # /app/config/config.yml
-    da_less:
-        compilation:
-            custom:
-                default: "MySuperBundle:"
-                override:
-                source: custom
-                destination: "MySuperBundle:custom"
+# /app/config/config.yml
+da_less:
+    compilation:
+        custom:
+            default: "MySuperBundle:"
+            override:
+            source: custom
+            destination: "MySuperBundle:custom"
 ```
 
 is equivalent to:
 
 ``` bash
-    # /app/config/config.yml
-    da_less:
-        compilation:
-            custom:
-                source: "MySuperBundle:custom"
-                destination: "MySuperBundle:custom"
+# /app/config/config.yml
+da_less:
+    compilation:
+        custom:
+            source: "MySuperBundle:custom"
+            destination: "MySuperBundle:custom"
 ```
 
 ### Execution of a configurated compilation
