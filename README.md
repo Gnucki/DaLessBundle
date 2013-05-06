@@ -23,7 +23,16 @@ Add the following line to your AppKernel.php file (it is highly recommended to a
 ``` php
 $bundles[] = new Da\LessBundle\DaLessBundle();
 ```
-	
+
+Add the following lines to your routing.yml file (it is highly recommended to add it in the routing_dev.yml file):
+
+``` bash
+DaLessBundle:
+    resource: "@DaLessBundle/Controller/"
+    type:     annotation
+    prefix:   /
+```
+
 Update the assets:
 
 ``` bash
