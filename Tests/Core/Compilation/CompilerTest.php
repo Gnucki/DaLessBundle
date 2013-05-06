@@ -38,6 +38,7 @@ class CompilerTest extends \PHPUnit_Framework_TestCase
     	$fs = new Filesystem();
         $fs->remove($rootDir.$bundlePath.'/Resources/private');
         $fs->remove($rootDir.$bundlePath.'/Resources/public/css/test');
+        $fs->remove(__DIR__.'/temp');
     }
 
 	private function getRootDir()
@@ -56,7 +57,8 @@ class CompilerTest extends \PHPUnit_Framework_TestCase
 			array_pop($path);
 		}
 
-		$this->assertNotEmpty($rootDir, 'the directory of a Symfony\'s project must be present to use the compiler.');
+		if (empty($rootDir))
+			$rootDir = __DIR__.'/temp';
 
 		return $rootDir;
 	}
