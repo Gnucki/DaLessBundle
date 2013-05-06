@@ -58,7 +58,10 @@ class CompilerTest extends \PHPUnit_Framework_TestCase
 		}
 
 		if (empty($rootDir))
+		{
 			$rootDir = __DIR__.'/temp';
+			$fs->mkdir($rootDir);
+		}
 
 		return $rootDir;
 	}
