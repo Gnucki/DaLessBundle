@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Da\LessBundle\Core\compilation;
+namespace Da\LessBundle\Core\Compilation;
 
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;

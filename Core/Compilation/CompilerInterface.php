@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Da\LessBundle\Core\compilation;
+namespace Da\LessBundle\Core\Compilation;
 
 /**
  * Compiler is the interface that a class should implement to handle the 
