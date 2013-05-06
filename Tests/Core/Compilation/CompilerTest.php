@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Translation\Tests;
+namespace Da\LessBundle\Core\Compilation;
 
 use Da\LessBundle\Core\Compilation\Compiler;
 use Symfony\Component\Filesystem\Filesystem;
