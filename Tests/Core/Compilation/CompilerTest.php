@@ -38,7 +38,8 @@ class CompilerTest extends \PHPUnit_Framework_TestCase
     	$fs = new Filesystem();
         $fs->remove($rootDir.$bundlePath.'/Resources/private');
         $fs->remove($rootDir.$bundlePath.'/Resources/public/css/test');
-        $fs->remove(__DIR__.'/temp');
+        $fs->remove(str_replace('\\', '/', __DIR__.'/../../../web'));
+        $fs->remove(str_replace('\\', '/', __DIR__.'/../../../app'));
     }
 
 	private function getRootDir()
@@ -59,8 +60,9 @@ class CompilerTest extends \PHPUnit_Framework_TestCase
 
 		if (empty($rootDir))
 		{
-			$rootDir = __DIR__.'/temp';
-			$fs->mkdir($rootDir);
+			$rootDir = __DIR__.'/../../..';
+			$fs->mkdir($rootDir.'/app');
+			$rootDir = str_replace('\\', '/', realpath($rootDir));
 		}
 
 		return $rootDir;
@@ -190,8 +192,8 @@ class CompilerTest extends \PHPUnit_Framework_TestCase
  			$this->assertTrue(isset($compilationInfo[$compilationId]['error']), '->prepare() throws an exception if the arguments are badly formatted');
 		else
 		{
+			$this->assertTrue($fs->exists($rootDir.'/web/'.$source), '->prepare() creates a temporary public directory for the compilation');
 	 		$this->assertEquals($expectedCompilationInfo, $compilationInfo, '->prepare() returns well formatted informations for the compilation');
-	 		$this->assertTrue($fs->exists($rootDir.'/web/'.$source), '->prepare() creates a temporary public directory for the compilation');
 	    	
 	    	$compiler->cleanTemporaryDirectory($compilationId);
 	    	$this->assertFalse($fs->exists($rootDir.'/web/'.$source), '->cleanTemporaryDirectory() cleans the temporary public directory of the compilation');
@@ -225,8 +227,8 @@ class CompilerTest extends \PHPUnit_Framework_TestCase
  			$this->assertTrue(isset($compilationInfo[$compilationId]['error']), '->prepareOne() throws an exception if the arguments are badly formatted');
 		else
 		{
+			$this->assertTrue($fs->exists($rootDir.'/web/'.$source), '->prepareOne() creates a temporary public directory for the compilation');
 	 		$this->assertEquals($expectedCompilationInfo, $compilationInfo, '->prepareOne() returns well formatted informations for the compilation');
-	 		$this->assertTrue($fs->exists($rootDir.'/web/'.$source), '->prepareOne() creates a temporary public directory for the compilation');
 	  		$fs->remove($rootDir.'/web/'.$source);
 	  	}
     }

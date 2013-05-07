@@ -10,6 +10,6 @@ env:
   - SYMFONY_VERSION="dev-master"
 
 before_script: 
-  - composer require symfony/symfony:${SYMFONY_VERSION}
+  - composer require symfony/symfony:${SYMFONY_VERSION} --dev
 
-phpunit: phpunit --coverage-text
+script: phpunit --coverage-text
